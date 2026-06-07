@@ -3376,7 +3376,7 @@ async function sendConsMsg() {
   try {
     if (consPendingFile) {
       showToast('Caricamento file...');
-      const storageRef = window.fbStorage.ref('chat-files/' + chatId + '/' + Date.now() + '_' + consPendingFile.name);
+      const storageRef = window.fbStorage.ref('chat-files/' + sendChatId + '/' + Date.now() + '_' + consPendingFile.name);
       const snap = await storageRef.put(consPendingFile);
       const fileUrl = await snap.ref.getDownloadURL();
       await msgsRef.add({ type: 'file', fileName: consPendingFile.name, fileUrl, senderId: user.uid, senderName, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
@@ -3501,7 +3501,16 @@ async function loadRealConsulenti() {
 function showDemoConsulenti() {
   const list = document.getElementById('cons-list');
   if (!list) return;
-  list.innerHTML = '<div style="text-align:center;padding:30px;color:var(--gray);font-size:13px"><div style="font-size:28px;margin-bottom:10px">👤</div>Nessun consulente ancora registrato.<br><br>Se sei un consulente OCF, <a onclick="showRegister('consulente')" style="color:var(--accent);cursor:pointer">registrati qui</a>.</div>';
+  const d = document.createElement('div');
+  d.style.cssText = 'text-align:center;padding:30px;color:var(--gray);font-size:13px';
+  d.innerHTML = '<div style="font-size:28px;margin-bottom:10px">👤</div>Nessun consulente ancora registrato.<br><br>';
+  const a = document.createElement('a');
+  a.style.cssText = 'color:var(--accent);cursor:pointer';
+  a.textContent = 'registrati qui';
+  a.onclick = function() { showRegister('consulente'); };
+  d.appendChild(a);
+  list.innerHTML = '';
+  list.appendChild(d);
 }
 
 function openRealProfile(id, nome, initials, color, data) {
