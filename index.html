@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Finnext deploy 2026-06-07T21:01:33.050582 -->
+<!-- Finnext deploy 2026-06-07T21:25:24.363017 -->
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -3313,8 +3313,8 @@ function initConsChat(clientId, clientName) {
   }
 
   // Real Firebase chat — use shared chat room between consulente and cliente
-  const chatId = 'chat_' + clientId;
-  const q = window.fbDb.collection('chats').doc(chatId).collection('messages').orderBy('createdAt', 'asc');
+  const consChatId = 'chat_' + clientId;
+  const q = window.fbDb.collection('chats').doc(consChatId).collection('messages').orderBy('createdAt', 'asc');
 
   consChatUnsub = q.onSnapshot((snapshot) => {
     box.innerHTML = '';
@@ -3372,10 +3372,10 @@ async function sendConsMsg() {
   }
 
   const realId = currentConsChat.realId || null;
-  const chatId = realId
+  const sendChatId = realId
     ? 'chat_' + [user.uid, realId].sort().join('_')
     : 'chat_' + currentConsChat.id;
-  const msgsRef = window.fbDb.collection('chats').doc(chatId).collection('messages');
+  const msgsRef = window.fbDb.collection('chats').doc(sendChatId).collection('messages');
 
   try {
     if (consPendingFile) {
