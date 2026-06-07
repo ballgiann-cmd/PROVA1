@@ -1191,6 +1191,12 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
   <script>
+  (function initFirebase() {
+    if (typeof firebase === 'undefined') {
+      // Retry after 200ms if Firebase not loaded yet
+      setTimeout(initFirebase, 200);
+      return;
+    }
     const firebaseConfig = {
       apiKey: "AIzaSyAgvX7g0VUWfpRfe1HZTjfaQ_heFI2Lweg",
       authDomain: "finnext-2848b.firebaseapp.com",
@@ -1200,12 +1206,12 @@
       appId: "1:501403769296:web:92fac0ceb613f3a04d81d5"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     window.fbAuth = firebase.auth();
     window.fbDb = firebase.firestore();
     window.fbStorage = firebase.storage();
 
-    // Auth state listener — set up after page loads so show() is defined
+    // Auth state listener
     window.addEventListener('load', function() {
       window.fbAuth.onAuthStateChanged(async (user) => {
         window.currentUser = user || null;
@@ -1226,7 +1232,8 @@
         }
       });
     });
-  </script>
+  })();
+</script>
 </head>
 <body>
 
