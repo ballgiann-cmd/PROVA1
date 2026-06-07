@@ -3285,54 +3285,50 @@ function initConsChat(clientId, clientName) {
   const user = window.fbAuth ? window.fbAuth.currentUser : null;
   const box = document.getElementById('cons-chat-messages');
   if (!box) return;
-
   if (consChatUnsub) { consChatUnsub(); consChatUnsub = null; }
 
-  // Use same chatId format as cliente: sorted IDs
-  const realClientId = (currentConsChat && currentConsChat.realId) ? currentConsChat.realId : null;
-  const chatId = realClientId
-    ? 'chat_' + [user.uid, realClientId].sort().join('_')
-    : 'chat_' + clientId;
-
   if (!user || !window.fbDb) {
-    // Demo mode - show example messages
     box.innerHTML = '';
-    const demoMsgs = [
-      { text: 'Buongiorno! Ho analizzato il suo portafoglio e vorrei discutere alcune modifiche.', from: 'cons', time: '09:15' },
-      { text: 'Ottimo, quando possiamo sentirci?', from: 'client', time: '09:32' },
-      { text: 'Sono disponibile domani alle 17:00 per una videocall.', from: 'cons', time: '09:35' },
+    const msgs = [
+      {t:'Buongiorno! Ho analizzato il portafoglio e vorrei discutere alcune modifiche.',f:'cons',time:'09:15'},
+      {t:'Ottimo, quando possiamo sentirci?',f:'client',time:'09:32'},
+      {t:'Sono disponibile domani alle 17:00.',f:'cons',time:'09:35'},
     ];
-    demoMsgs.forEach(m => {
-      const div = document.createElement('div');
-      div.className = 'chat-msg ' + (m.from === 'cons' ? 'chat-msg-out' : 'chat-msg-in');
-      div.innerHTML = '<div class="chat-bubble ' + (m.from === 'cons' ? 'chat-bubble-out' : 'chat-bubble-in') + '"><span style="font-size:13px">' + m.text + '</span></div><div class="chat-time">' + (m.from === 'cons' ? 'Tu' : clientName) + ' · ' + m.time + '</div>';
-      box.appendChild(div);
+    msgs.forEach(m => {
+      const d = document.createElement('div');
+      d.className = 'chat-msg ' + (m.f==='cons' ? 'chat-msg-out' : 'chat-msg-in');
+      const b = document.createElement('div');
+      b.className = 'chat-bubble ' + (m.f==='cons' ? 'chat-bubble-out' : 'chat-bubble-in');
+      b.textContent = m.t; b.style.fontSize = '13px';
+      const te = document.createElement('div'); te.className = 'chat-time';
+      te.textContent = (m.f==='cons' ? 'Tu' : clientName) + ' · ' + m.time;
+      d.appendChild(b); d.appendChild(te); box.appendChild(d);
     });
     box.scrollTop = box.scrollHeight;
     return;
   }
 
-  // Real Firebase chat — use shared chat room between consulente and cliente
-  const consChatId = 'chat_' + clientId;
-  const q = window.fbDb.collection('chats').doc(consChatId).collection('messages').orderBy('createdAt', 'asc');
-
+  const sharedChatId = getSharedChatId(user.uid, clientId);
+  const q = window.fbDb.collection('chats').doc(sharedChatId).collection('messages').orderBy('createdAt','asc');
   consChatUnsub = q.onSnapshot((snapshot) => {
     box.innerHTML = '';
     if (snapshot.empty) {
-      box.innerHTML = '<div style="text-align:center;padding:30px;color:var(--gray);font-size:13px">Nessun messaggio con ' + clientName + '. Scrivi per iniziare.</div>';
+      box.innerHTML = '<div style="text-align:center;padding:30px;color:var(--gray);font-size:13px">Scrivi il primo messaggio!</div>';
       return;
     }
-    snapshot.forEach(docSnap => {
-      const msg = docSnap.data();
+    snapshot.forEach(ds => {
+      const msg = ds.data();
       const isMe = msg.senderId === user.uid;
-      const time = msg.createdAt ? msg.createdAt.toDate().toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit'}) : 'Adesso';
-      const div = document.createElement('div');
-      div.className = 'chat-msg ' + (isMe ? 'chat-msg-out' : 'chat-msg-in');
-      const content = msg.type === 'file'
-        ? '<a href="' + msg.fileUrl + '" target="_blank" style="color:var(--accent);font-size:13px">📎 ' + msg.fileName + '</a>'
-        : '<span style="font-size:13px">' + (msg.text || '') + '</span>';
-      div.innerHTML = '<div class="chat-bubble ' + (isMe ? 'chat-bubble-out' : 'chat-bubble-in') + '">' + content + '</div><div class="chat-time">' + (isMe ? 'Tu' : (msg.senderName || clientName)) + ' · ' + time + '</div>';
-      box.appendChild(div);
+      const time = msg.createdAt ? msg.createdAt.toDate().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) : '';
+      const d = document.createElement('div');
+      d.className = 'chat-msg ' + (isMe ? 'chat-msg-out' : 'chat-msg-in');
+      const b = document.createElement('div');
+      b.className = 'chat-bubble ' + (isMe ? 'chat-bubble-out' : 'chat-bubble-in');
+      b.textContent = msg.type==='file' ? '📎 '+msg.fileName : (msg.text||'');
+      b.style.fontSize = '13px';
+      const te = document.createElement('div'); te.className = 'chat-time';
+      te.textContent = (isMe ? (window.currentUserName||'Tu') : clientName) + (time?' · '+time:'');
+      d.appendChild(b); d.appendChild(te); box.appendChild(d);
     });
     box.scrollTop = box.scrollHeight;
   });
