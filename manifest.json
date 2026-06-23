@@ -1,0 +1,59 @@
+{
+  "name": "Finnext — Finanza Indipendente",
+  "short_name": "Finnext",
+  "description": "Il marketplace dei consulenti finanziari indipendenti OCF",
+  "start_url": "/PROVA1/",
+  "scope": "/PROVA1/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#0B1D3A",
+  "theme_color": "#0B1D3A",
+  "orientation": "portrait-primary",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["finance", "business"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "description": "Apri la chat con il tuo consulente",
+      "url": "/PROVA1/?page=chat",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Portafoglio",
+      "short_name": "Portafoglio",
+      "description": "Vedi il tuo portafoglio",
+      "url": "/PROVA1/?page=portafoglio",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
