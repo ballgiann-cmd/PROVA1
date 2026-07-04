@@ -1532,9 +1532,9 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom-bar" style="max-width:900px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);gap:12px">
-      <div class="footer-bottom-item" style="font-size:13px;color:rgba(255,255,255,0.55)">© 2025 Fiby. Tutti i diritti riservati.</div>
-      <div class="footer-bottom-item" style="font-size:13px;color:rgba(255,255,255,0.55)">Fiby non è un intermediario finanziario. I consulenti OCF sono iscritti all'Albo OCF.</div>
+    <div style="max-width:900px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);display:block;width:100%;box-sizing:border-box">
+      <div style="display:block;width:100%;font-size:13px;color:rgba(255,255,255,0.55);text-align:left;line-height:1.6">© 2025 Fiby. Tutti i diritti riservati.</div>
+      <div style="display:block;width:100%;font-size:13px;color:rgba(255,255,255,0.55);text-align:left;line-height:1.6;margin-top:10px">Fiby non è un intermediario finanziario. I consulenti OCF sono iscritti all'Albo OCF.</div>
     </div>
   </footer>
 
@@ -1560,18 +1560,6 @@
       grid-template-columns: 1fr !important;
       row-gap: 28px !important;
     }
-  }
-  .footer-bottom-bar {
-    display: block;
-  }
-  .footer-bottom-item {
-    display: block;
-    width: 100%;
-    text-align: left;
-    line-height: 1.6;
-  }
-  .footer-bottom-item + .footer-bottom-item {
-    margin-top: 10px;
   }
   @media (min-width: 769px) {
     #nav-mobile { display: none !important; }
@@ -1889,21 +1877,6 @@
             <div class="app-kpi-val">+6,2%</div>
             <div class="app-kpi-sub" style="color:var(--success)">▲ vs benchmark +4,1%</div>
           </div>
-          <div class="app-kpi app-kpi-blue">
-            <div class="app-kpi-label">Volatilità annua</div>
-            <div class="app-kpi-val">8,4%</div>
-            <div class="app-kpi-sub">Rischio moderato</div>
-          </div>
-          <div class="app-kpi app-kpi-orange">
-            <div class="app-kpi-label">Max Drawdown</div>
-            <div class="app-kpi-val">-6,1%</div>
-            <div class="app-kpi-sub">Ultimi 12 mesi</div>
-          </div>
-          <div class="app-kpi app-kpi-purple">
-            <div class="app-kpi-label">Sharpe Ratio</div>
-            <div class="app-kpi-val">1,42</div>
-            <div class="app-kpi-sub">Buono (&gt;1 ottimo)</div>
-          </div>
         </div>
         <div class="app-two-col">
           <div class="app-card">
@@ -2008,7 +1981,7 @@
               </div>
             </div>
             <div style="margin-top:16px">
-              <button class="app-btn app-btn-primary" style="width:100%">📅 Prenota nuova videocall</button>
+              <button class="app-btn app-btn-primary" style="width:100%" onclick="openGoogleCalendarBooking((window.currentUserData && window.currentUserData.consulenteNome) || null)">📅 Prenota nuova videocall</button>
             </div>
           </div>
 
@@ -2110,7 +2083,7 @@
             <div id="pm-reviews-list"></div>
             <div class="profile-cta">
               <button class="app-btn app-btn-primary" style="flex:2" id="pm-cta">Contatta</button>
-              <button class="app-btn app-btn-ghost" style="flex:1">Prenota call gratuita</button>
+              <button class="app-btn app-btn-ghost" style="flex:1" onclick="openGoogleCalendarBooking(document.getElementById('pm-name').textContent)">📅 Prenota call gratuita</button>
             </div>
           </div>
         </div>
@@ -2295,123 +2268,15 @@
           <div class="crm-table-desktop">
             <table class="app-table">
               <thead><tr><th>Cliente</th><th>AUM</th><th>YTD</th><th>Ultima attività</th><th>Stato</th><th></th></tr></thead>
-              <tbody>
-                <tr>
-                  <td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#4A7FD4,#00D4FF);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">MR</div><div><div style="font-weight:600;font-size:13px">Mario Rossi</div><div style="font-size:11px;color:var(--gray)">mario.rossi@email.it</div></div></div></td>
-                  <td>€ 142.850</td><td style="color:var(--success)">+8,4%</td><td>Oggi</td>
-                  <td><span class="app-badge app-badge-green">Attivo</span></td>
-                  <td><button class="app-btn app-btn-ghost" style="font-size:12px;padding:5px 10px">Apri</button></td>
-                </tr>
-                <tr>
-                  <td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">SF</div><div><div style="font-weight:600;font-size:13px">Sara Ferrari</div><div style="font-size:11px;color:var(--gray)">sara.ferrari@email.it</div></div></div></td>
-                  <td>€ 289.000</td><td style="color:var(--success)">+6,1%</td><td>2 giorni fa</td>
-                  <td><span class="app-badge app-badge-green">Attivo</span></td>
-                  <td><button class="app-btn app-btn-ghost" style="font-size:12px;padding:5px 10px">Apri</button></td>
-                </tr>
-                <tr>
-                  <td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#00C48C,#00FFB3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">GA</div><div><div style="font-weight:600;font-size:13px">Gruppo Alfa SRL</div><div style="font-size:11px;color:var(--gray)">admin@gruppoalfa.it</div></div></div></td>
-                  <td>€ 520.000</td><td style="color:var(--success)">+4,2%</td><td>1 sett. fa</td>
-                  <td><span class="app-badge app-badge-green">Attivo</span></td>
-                  <td><button class="app-btn app-btn-ghost" style="font-size:12px;padding:5px 10px">Apri</button></td>
-                </tr>
-                <tr>
-                  <td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#FF8C00,#FFB020);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">TC</div><div><div style="font-weight:600;font-size:13px">Tommaso Conti</div><div style="font-size:11px;color:var(--gray)">t.conti@email.it</div></div></div></td>
-                  <td>€ 98.200</td><td style="color:var(--success)">+11,2%</td><td>3 giorni fa</td>
-                  <td><span class="app-badge app-badge-orange">KYC scaduto</span></td>
-                  <td><button class="app-btn app-btn-primary" style="font-size:12px;padding:5px 10px">Aggiorna</button></td>
-                </tr>
-                <tr>
-                  <td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#E84444,#FF7070);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">EM</div><div><div style="font-weight:600;font-size:13px">Elena Moretti</div><div style="font-size:11px;color:var(--gray)">e.moretti@email.it</div></div></div></td>
-                  <td>€ 67.400</td><td style="color:var(--danger)">-1,8%</td><td>5 giorni fa</td>
-                  <td><span class="app-badge app-badge-green">Attivo</span></td>
-                  <td><button class="app-btn app-btn-ghost" style="font-size:12px;padding:5px 10px">Apri</button></td>
-                </tr>
+              <tbody id="crm-clienti-tbody">
+                <tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px">Caricamento...</td></tr>
               </tbody>
             </table>
           </div>
 
           <!-- Mobile: card list -->
-          <div class="crm-cards-mobile">
-            <div class="crm-mobile-card">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#4A7FD4,#00D4FF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">MR</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:14px;color:#fff">Mario Rossi</div>
-                  <div style="font-size:11px;color:var(--gray)">mario.rossi@email.it</div>
-                </div>
-                <span class="app-badge app-badge-green">Attivo</span>
-              </div>
-              <div class="crm-mobile-stats">
-                <div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">€ 142.850</div></div>
-                <div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val" style="color:var(--success)">+8,4%</div></div>
-                <div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">Oggi</div></div>
-                <button class="app-btn app-btn-ghost" style="font-size:12px;padding:6px 14px;align-self:center">Apri</button>
-              </div>
-            </div>
-            <div class="crm-mobile-card">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">SF</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:14px;color:#fff">Sara Ferrari</div>
-                  <div style="font-size:11px;color:var(--gray)">sara.ferrari@email.it</div>
-                </div>
-                <span class="app-badge app-badge-green">Attivo</span>
-              </div>
-              <div class="crm-mobile-stats">
-                <div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">€ 289.000</div></div>
-                <div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val" style="color:var(--success)">+6,1%</div></div>
-                <div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">2 gg fa</div></div>
-                <button class="app-btn app-btn-ghost" style="font-size:12px;padding:6px 14px;align-self:center">Apri</button>
-              </div>
-            </div>
-            <div class="crm-mobile-card">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#00C48C,#00FFB3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">GA</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:14px;color:#fff">Gruppo Alfa SRL</div>
-                  <div style="font-size:11px;color:var(--gray)">admin@gruppoalfa.it</div>
-                </div>
-                <span class="app-badge app-badge-green">Attivo</span>
-              </div>
-              <div class="crm-mobile-stats">
-                <div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">€ 520.000</div></div>
-                <div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val" style="color:var(--success)">+4,2%</div></div>
-                <div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">1 sett.</div></div>
-                <button class="app-btn app-btn-ghost" style="font-size:12px;padding:6px 14px;align-self:center">Apri</button>
-              </div>
-            </div>
-            <div class="crm-mobile-card" style="border-color:rgba(255,176,32,0.2);background:rgba(255,176,32,0.04)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#FF8C00,#FFB020);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">TC</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:14px;color:#fff">Tommaso Conti</div>
-                  <div style="font-size:11px;color:var(--gray)">t.conti@email.it</div>
-                </div>
-                <span class="app-badge app-badge-orange">KYC scaduto</span>
-              </div>
-              <div class="crm-mobile-stats">
-                <div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">€ 98.200</div></div>
-                <div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val" style="color:var(--success)">+11,2%</div></div>
-                <div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">3 gg fa</div></div>
-                <button class="app-btn app-btn-primary" style="font-size:12px;padding:6px 14px;align-self:center">Aggiorna</button>
-              </div>
-            </div>
-            <div class="crm-mobile-card">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#E84444,#FF7070);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">EM</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:14px;color:#fff">Elena Moretti</div>
-                  <div style="font-size:11px;color:var(--gray)">e.moretti@email.it</div>
-                </div>
-                <span class="app-badge app-badge-green">Attivo</span>
-              </div>
-              <div class="crm-mobile-stats">
-                <div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">€ 67.400</div></div>
-                <div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val" style="color:var(--danger)">-1,8%</div></div>
-                <div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">5 gg fa</div></div>
-                <button class="app-btn app-btn-ghost" style="font-size:12px;padding:6px 14px;align-self:center">Apri</button>
-              </div>
-            </div>
+          <div class="crm-cards-mobile" id="crm-clienti-mobile">
+            <div style="text-align:center;color:var(--gray);padding:20px;font-size:12px">Caricamento...</div>
           </div>
         </div>
       </div>
@@ -2473,10 +2338,11 @@
           </div>
           <div class="app-card">
             <div class="app-card-title">Prossimi appuntamenti</div>
-            <div class="app-activity"><div class="app-activity-dot" style="background:rgba(26,82,232,0.15)">📹</div><div style="flex:1"><div class="app-activity-title">Mario Rossi — Review annuale</div><div class="app-activity-meta">Oggi · ore 17:00 · Videocall</div></div><button class="app-btn app-btn-primary" style="font-size:11px;padding:5px 10px">Avvia</button></div>
-            <div class="app-activity"><div class="app-activity-dot" style="background:rgba(0,196,140,0.15)">📞</div><div style="flex:1"><div class="app-activity-title">Sara Ferrari — Piano previdenziale</div><div class="app-activity-meta">Oggi · ore 18:30</div></div><button class="app-btn app-btn-ghost" style="font-size:11px;padding:5px 10px">Avvia</button></div>
-            <div class="app-activity"><div class="app-activity-dot" style="background:rgba(255,176,32,0.15)">📋</div><div><div class="app-activity-title">Gruppo Alfa — Rendicontazione</div><div class="app-activity-meta">15 Dic · ore 10:00</div></div></div>
-            <div class="app-activity"><div class="app-activity-dot" style="background:rgba(124,58,237,0.15)">📋</div><div><div class="app-activity-title">Elena Moretti — Onboarding</div><div class="app-activity-meta">18 Dic · ore 14:00</div></div></div>
+            <div style="text-align:center;padding:24px 10px;color:var(--gray);font-size:13px">
+              <div style="font-size:24px;margin-bottom:8px">📅</div>
+              Nessun appuntamento in programma.<br>
+              <span style="font-size:12px">Gli appuntamenti prenotati dai clienti appariranno qui.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -2488,15 +2354,15 @@
           <button class="app-btn app-btn-primary">+ Genera report</button>
         </div>
         <div class="app-kpi-row" style="grid-template-columns:repeat(3,1fr)">
-          <div class="app-kpi app-kpi-green"><div class="app-kpi-label">Clienti in regola</div><div class="app-kpi-val">15/18</div><div class="app-kpi-sub" style="color:var(--success)">83% aggiornati</div></div>
-          <div class="app-kpi app-kpi-orange"><div class="app-kpi-label">KYC in scadenza</div><div class="app-kpi-val">3</div><div class="app-kpi-sub" style="color:var(--warning)">Entro 30 giorni</div></div>
-          <div class="app-kpi app-kpi-blue"><div class="app-kpi-label">Report Q3 inviati</div><div class="app-kpi-val">18/18</div><div class="app-kpi-sub" style="color:var(--success)">Tutti inviati ✓</div></div>
+          <div class="app-kpi app-kpi-green"><div class="app-kpi-label">Clienti in regola</div><div class="app-kpi-val" id="compliance-kpi-ok">—</div><div class="app-kpi-sub">Da monitorare</div></div>
+          <div class="app-kpi app-kpi-orange"><div class="app-kpi-label">KYC in scadenza</div><div class="app-kpi-val">—</div><div class="app-kpi-sub">Nessun dato ancora</div></div>
+          <div class="app-kpi app-kpi-blue"><div class="app-kpi-label">Report inviati</div><div class="app-kpi-val">—</div><div class="app-kpi-sub">Nessun dato ancora</div></div>
         </div>
         <div style="padding:14px 16px;background:rgba(255,176,32,0.08);border:1px solid rgba(255,176,32,0.2);border-radius:12px;margin-bottom:20px;display:flex;align-items:center;gap:10px">
           <span style="font-size:18px">⚠️</span>
           <div>
-            <div style="font-size:13px;color:var(--warning);font-weight:600">3 clienti da aggiornare entro fine mese</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Tommaso Conti, Elena Moretti, Marco Belli — profilatura MiFID scaduta</div>
+            <div style="font-size:13px;color:var(--warning);font-weight:600">Tieni sotto controllo le profilature in scadenza</div>
+            <div style="font-size:12px;color:var(--gray);margin-top:2px">I clienti con KYC o profilatura MiFID da rinnovare compariranno qui.</div>
           </div>
         </div>
         <div class="app-card">
@@ -2504,11 +2370,8 @@
           <div style="overflow-x:auto">
             <table class="app-table" style="margin-top:10px">
               <thead><tr><th>Cliente</th><th>KYC</th><th>Profilatura</th><th>Report Q3</th><th>Adeguatezza</th><th>Azione</th></tr></thead>
-              <tbody>
-                <tr><td>Mario Rossi</td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><button class="app-btn app-btn-ghost" style="font-size:11px;padding:4px 10px">Dettaglio</button></td></tr>
-                <tr><td>Sara Ferrari</td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><button class="app-btn app-btn-ghost" style="font-size:11px;padding:4px 10px">Dettaglio</button></td></tr>
-                <tr><td>Tommaso Conti</td><td><span class="app-badge app-badge-orange">⚠ Scade</span></td><td><span class="app-badge app-badge-orange">⚠ Scade</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><span class="app-badge app-badge-blue">Da verificare</span></td><td><button class="app-btn app-btn-primary" style="font-size:11px;padding:4px 10px">Aggiorna</button></td></tr>
-                <tr><td>Gruppo Alfa SRL</td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓ OK</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><span class="app-badge app-badge-green">✓</span></td><td><button class="app-btn app-btn-ghost" style="font-size:11px;padding:4px 10px">Dettaglio</button></td></tr>
+              <tbody id="compliance-tbody">
+                <tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px">Caricamento...</td></tr>
               </tbody>
             </table>
           </div>
@@ -2522,9 +2385,9 @@
           <button class="app-btn app-btn-primary">+ Emetti fattura</button>
         </div>
         <div class="app-kpi-row" style="grid-template-columns:repeat(3,1fr)">
-          <div class="app-kpi app-kpi-green"><div class="app-kpi-label">Fatturato YTD</div><div class="app-kpi-val">€ 28.400</div><div class="app-kpi-sub" style="color:var(--success)">+22% vs anno scorso</div></div>
-          <div class="app-kpi app-kpi-blue"><div class="app-kpi-label">Fatture emesse</div><div class="app-kpi-val">18</div><div class="app-kpi-sub" style="color:var(--success)">Tutte pagate ✓</div></div>
-          <div class="app-kpi app-kpi-orange"><div class="app-kpi-label">Fee Fiby YTD</div><div class="app-kpi-val">€ 4.200</div><div class="app-kpi-sub" style="color:var(--gray)">0,10% su €4,2M AUM</div></div>
+          <div class="app-kpi app-kpi-green"><div class="app-kpi-label">Fatturato YTD</div><div class="app-kpi-val">—</div><div class="app-kpi-sub">Nessun dato ancora</div></div>
+          <div class="app-kpi app-kpi-blue"><div class="app-kpi-label">Fatture emesse</div><div class="app-kpi-val">—</div><div class="app-kpi-sub">Nessun dato ancora</div></div>
+          <div class="app-kpi app-kpi-orange"><div class="app-kpi-label">Fee Fiby YTD</div><div class="app-kpi-val">—</div><div class="app-kpi-sub" style="color:var(--gray)">Nessun dato ancora</div></div>
         </div>
         <div class="app-card">
           <div class="app-card-title">Ultime fatture</div>
@@ -2532,10 +2395,7 @@
             <table class="app-table" style="margin-top:10px">
               <thead><tr><th>Cliente</th><th>Periodo</th><th>Importo</th><th>Data emissione</th><th>Stato</th></tr></thead>
               <tbody>
-                <tr><td>Mario Rossi</td><td>Q4 2025</td><td style="font-weight:600">€ 328</td><td>1 Ott 2025</td><td><span class="app-badge app-badge-green">Pagata</span></td></tr>
-                <tr><td>Sara Ferrari</td><td>Q4 2025</td><td style="font-weight:600">€ 867</td><td>1 Ott 2025</td><td><span class="app-badge app-badge-green">Pagata</span></td></tr>
-                <tr><td>Gruppo Alfa SRL</td><td>Q4 2025</td><td style="font-weight:600">€ 1.560</td><td>1 Ott 2025</td><td><span class="app-badge app-badge-orange">In attesa</span></td></tr>
-                <tr><td>Tommaso Conti</td><td>Q4 2025</td><td style="font-weight:600">€ 294</td><td>1 Ott 2025</td><td><span class="app-badge app-badge-green">Pagata</span></td></tr>
+                <tr><td colspan="5" style="text-align:center;color:var(--gray);padding:24px">Nessuna fattura emessa ancora.</td></tr>
               </tbody>
             </table>
           </div>
@@ -2772,6 +2632,12 @@ function consPage(page, el) {
     const nm = document.getElementById('cons-chat-name');
     if (nm) nm.textContent = 'Seleziona un cliente';
     setTimeout(loadRealClients, 300);
+  }
+  if (page === 'crm') {
+    setTimeout(loadCRMClienti, 200);
+  }
+  if (page === 'compliance') {
+    setTimeout(loadComplianceClienti, 200);
   }
 }
 
@@ -3206,6 +3072,7 @@ async function doLoginFirebase() {
     }
     updateUserUI();
     show(role === 'consulente' ? 'app-consulente' : 'app-cliente');
+    if (role === 'consulente') setTimeout(loadCRMClienti, 400);
     setTimeout(initChat, 500);
     // Init push notifications after login
     if (window.initPushNotifications) window.initPushNotifications(cred.user.uid);
@@ -3262,6 +3129,7 @@ async function doRegisterFirebase() {
 
     updateUserUI();
     show(currentRole === 'consulente' ? 'app-consulente' : 'app-cliente');
+    if (currentRole === 'consulente') setTimeout(loadCRMClienti, 400);
     initChat();
     // Mostra questionario ai nuovi clienti
     if (currentRole === 'cliente') {
@@ -3761,6 +3629,29 @@ function handleConsFileAttach(input) {
 var _allConsulenti = [];
 
 // ═══════════════════════════════════════
+// PRENOTAZIONE → GOOGLE CALENDAR
+// Crea un evento precompilato nel Google Calendar personale del cliente
+// (nessun OAuth richiesto: usa lo schema URL pubblico "quick add" di Google Calendar).
+// Nota: questo NON legge la disponibilità reale del consulente — per quello
+// servirebbe un collegamento OAuth lato consulente + backend.
+// ═══════════════════════════════════════
+function openGoogleCalendarBooking(consultantName) {
+  const nome = (consultantName || '').trim() || 'il tuo consulente Fiby';
+  // Propone il prossimo giorno lavorativo utile alle 10:00, durata 30 minuti
+  let d = new Date();
+  d.setDate(d.getDate() + 1);
+  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+  d.setHours(10, 0, 0, 0);
+  const end = new Date(d.getTime() + 30 * 60000);
+  const toGCalDate = (dt) => dt.toISOString().replace(/[-:]|\.\d{3}/g, '');
+  const title = encodeURIComponent('Colloquio con ' + nome);
+  const details = encodeURIComponent('Videocall organizzata tramite Fiby. Conferma data e ora esatte con ' + nome + ' in chat prima dell\'appuntamento — questo è un orario proposto, non ancora confermato.');
+  const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title
+    + '&dates=' + toGCalDate(d) + '/' + toGCalDate(end) + '&details=' + details;
+  window.open(url, '_blank');
+}
+
+// ═══════════════════════════════════════
 // MATCH: dal questionario a 3 consulenti alla volta
 // ═══════════════════════════════════════
 var _matchQueue = [];
@@ -3817,6 +3708,7 @@ function computeMatches() {
 
 function showMatchResults() {
   computeMatches();
+  show('app-cliente');
   cPage('cerca', null);
   setBottomNav('cerca', 'cliente');
   const ms = document.getElementById('match-section');
@@ -4211,6 +4103,130 @@ async function loadRealClients() {
 }
 
 // ═══════════════════════════════════════
+// CRM CLIENTI — stessa fonte dati reale/filtrata della chat
+// ═══════════════════════════════════════
+async function loadCRMClienti() {
+  const tbody = document.getElementById('crm-clienti-tbody');
+  const mobileWrap = document.getElementById('crm-clienti-mobile');
+  if (!tbody && !mobileWrap) return;
+  const currentUid = loggedInConsulentId || (window.fbAuth && window.fbAuth.currentUser ? window.fbAuth.currentUser.uid : null);
+
+  if (!currentUid || !window.fbDb) {
+    if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px">Accedi per vedere i tuoi clienti</td></tr>';
+    if (mobileWrap) mobileWrap.innerHTML = '<div style="text-align:center;color:var(--gray);padding:20px;font-size:12px">Accedi per vedere i tuoi clienti</div>';
+    return;
+  }
+
+  try {
+    const snapshot = await window.fbDb.collection('users').get();
+    const clients = [];
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      if (d.role === 'cliente' && d.consulenteId === currentUid) clients.push({ id: doc.id, ...d });
+    });
+
+    // Aggiorna sottotitolo e KPI "Clienti attivi" con il numero reale
+    const sub = document.querySelector('#c-page-crm .app-page-sub');
+    if (sub) sub.textContent = clients.length + (clients.length === 1 ? ' cliente attivo' : ' clienti attivi');
+    const kpiVal = document.querySelector('#c-page-crm .app-kpi-green .app-kpi-val');
+    if (kpiVal) kpiVal.textContent = clients.length;
+
+    if (clients.length === 0) {
+      const emptyMsg = 'Nessun cliente ancora.<br>Usa "Invita cliente" per iniziare.';
+      if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:24px">' + emptyMsg + '</td></tr>';
+      if (mobileWrap) mobileWrap.innerHTML = '<div style="text-align:center;color:var(--gray);padding:24px;font-size:13px">' + emptyMsg + '</div>';
+      return;
+    }
+
+    if (tbody) tbody.innerHTML = '';
+    if (mobileWrap) mobileWrap.innerHTML = '';
+
+    clients.forEach((c, i) => {
+      const nome = (c.name && c.name.trim()) ? c.name.trim() : (c.email || 'Cliente');
+      const nomeSafe = nome.replace(/'/g, "\\'");
+      const initials = nome.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+      const color = CLIENT_COLORS[i % CLIENT_COLORS.length];
+
+      if (tbody) {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:' + color + ';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">' + initials + '</div><div><div style="font-weight:600;font-size:13px">' + nome + '</div><div style="font-size:11px;color:var(--gray)">' + (c.email||'') + '</div></div></div></td>' +
+          '<td style="color:var(--gray)">—</td><td style="color:var(--gray)">—</td><td style="color:var(--gray)">—</td>' +
+          '<td><span class="app-badge app-badge-green">Attivo</span></td>' +
+          '<td><button class="app-btn app-btn-ghost" style="font-size:12px;padding:5px 10px" onclick="openClientFromCRM(\'' + c.id + '\',\'' + nomeSafe + '\')">Apri</button></td>';
+        tbody.appendChild(tr);
+      }
+      if (mobileWrap) {
+        const card = document.createElement('div');
+        card.className = 'crm-mobile-card';
+        card.innerHTML =
+          '<div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:40px;border-radius:10px;background:' + color + ';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">' + initials + '</div><div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px;color:#fff">' + nome + '</div><div style="font-size:11px;color:var(--gray)">' + (c.email||'') + '</div></div><span class="app-badge app-badge-green">Attivo</span></div>' +
+          '<div class="crm-mobile-stats"><div><div class="crm-mobile-stat-label">AUM</div><div class="crm-mobile-stat-val">—</div></div><div><div class="crm-mobile-stat-label">YTD</div><div class="crm-mobile-stat-val">—</div></div><div><div class="crm-mobile-stat-label">Attività</div><div class="crm-mobile-stat-val">—</div></div><button class="app-btn app-btn-ghost" style="font-size:12px;padding:6px 14px;align-self:center" onclick="openClientFromCRM(\'' + c.id + '\',\'' + nomeSafe + '\')">Apri</button></div>';
+        mobileWrap.appendChild(card);
+      }
+    });
+  } catch(e) {
+    console.error('Load CRM clienti error:', e);
+    if (tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--danger);padding:20px">Errore caricamento clienti</td></tr>';
+    if (mobileWrap) mobileWrap.innerHTML = '<div style="text-align:center;color:var(--danger);padding:20px;font-size:12px">Errore caricamento clienti</div>';
+  }
+}
+
+function openClientFromCRM(id, nome) {
+  const navItem = document.querySelector('.app-nav-item[onclick*="chat-cons"]');
+  consPage('chat-cons', navItem);
+  setTimeout(() => {
+    initConsChat(id, nome);
+    const av = document.getElementById('cons-chat-avatar');
+    const nm = document.getElementById('cons-chat-name');
+    if (nm) nm.textContent = nome;
+    if (av) av.textContent = nome.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  }, 350);
+}
+
+// ═══════════════════════════════════════
+// COMPLIANCE — checklist con clienti reali (stato KYC/profilatura non ancora tracciato: onesto "Da verificare")
+// ═══════════════════════════════════════
+async function loadComplianceClienti() {
+  const tbody = document.getElementById('compliance-tbody');
+  if (!tbody) return;
+  const currentUid = loggedInConsulentId || (window.fbAuth && window.fbAuth.currentUser ? window.fbAuth.currentUser.uid : null);
+  if (!currentUid || !window.fbDb) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:20px">Accedi per vedere i tuoi clienti</td></tr>';
+    return;
+  }
+  try {
+    const snapshot = await window.fbDb.collection('users').get();
+    const clients = [];
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      if (d.role === 'cliente' && d.consulenteId === currentUid) clients.push({ id: doc.id, ...d });
+    });
+    const kpiOk = document.getElementById('compliance-kpi-ok');
+    if (kpiOk) kpiOk.textContent = clients.length ? ('0/' + clients.length) : '—';
+    if (clients.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:24px">Nessun cliente ancora.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    clients.forEach(c => {
+      const nome = (c.name && c.name.trim()) ? c.name.trim() : (c.email || 'Cliente');
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + nome + '</td>' +
+        '<td><span class="app-badge app-badge-blue">Da verificare</span></td>' +
+        '<td><span class="app-badge app-badge-blue">Da verificare</span></td>' +
+        '<td><span class="app-badge app-badge-blue">—</span></td>' +
+        '<td><span class="app-badge app-badge-blue">—</span></td>' +
+        '<td><button class="app-btn app-btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openClientFromCRM(\'' + c.id + '\',\'' + nome.replace(/'/g,"\\'") + '\')">Apri</button></td>';
+      tbody.appendChild(tr);
+    });
+  } catch(e) {
+    console.error('Load compliance error:', e);
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--danger);padding:20px">Errore caricamento</td></tr>';
+  }
+}
+
+// ═══════════════════════════════════════
 // FIX CHAT ROOM ID - shared between consulente and cliente
 // ═══════════════════════════════════════
 function getSharedChatId(uid1, uid2) {
@@ -4528,6 +4544,10 @@ function closeQuestionario(goToCerca) {
           var activeScreen = document.querySelector('.screen.active');
           if (activeScreen && (activeScreen.id === 'landing' || activeScreen.id === 'login' || activeScreen.id === 'register')) {
             show(role === 'consulente' ? 'app-consulente' : 'app-cliente');
+          }
+          if (role === 'consulente') {
+            loggedInConsulentId = user.uid;
+            setTimeout(loadCRMClienti, 400);
           }
           updateUserUI();
         }
